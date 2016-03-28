@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>WWGWC Charts</title>
+  {{> head}}
+</head>
+
+<body>
+  <div id="index" data-role="page" data-theme="a">
+    <div data-role="header">
+      <h1>Let them eat pie</h1>
+    </div>
+
+    <div data-role="content">
+
+      <div class="ui-body ui-body-a ui-corner-all">
+        <h3>The First Chart</h3>
+        <p>This is a pie chart.  Each slice of the pie needs a label, a value,
+        and a color.</p>
+
+        <div style="text-align: center;">
+          <canvas width="200px" height="200px"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <a href="/housecup" class="ui-btn ui-corner-all">Next</a>
+
+    <script>
+      console.log("LOAD page1");
+      $(document).on('pageshow',"#index", function(e) {
+        console.log("PAGESHOW page1")
+        var data = [{
+          value: 10,
+          label: 'First',
+          color: 'red'
+        }, {
+          value: 20,
+          label: 'Second',
+          color: 'blue'
+        }, {
+          value: 25,
+          label: 'Third',
+          color: 'green'
+        }];
+        var options = {};
+  
+        var ctx = $(e.target).find("canvas").get(0).getContext("2d");
+        /* global Chart */
+        new Chart(ctx).Pie(data, options);
+      });
+    </script>
+    </div>
+
+
+</body>
+</html>

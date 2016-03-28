@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>WWGWC Charts</title>
+  {{> head}}
+</head>
+
+<body>
+  <div id="housecup" data-role="page" data-theme="a">
+    <div data-role="header">
+      <h1>Let them eat pie</h1>
+    </div>
+
+    <div data-role="content">
+      <div class="ui-body ui-body-a ui-corner-all">
+        <h3>House Cup</h3>
+        <p>This chart shows the points awarded to each house in The Sorceror's Stone.
+        As you can see, <a href="/images/10points.jpg" rel="external">Dumbledore is a big cheater</a>.</p>
+
+        <div style="text-align: center;">
+          <canvas width="200px" height="200px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <a href="/deaths" class="ui-btn ui-corner-all">Next</a>
+
+
+    <script>
+      console.log("LOAD page2")
+      $(document).on('pageshow', "#housecup", function(e) {
+        console.log("PAGESHOW page2", e);
+        var data = [{
+          value: {{gryffindor}},
+          label: 'Gryffindor',
+          color: '#ae0001',
+          highlight: '#d3a625'
+        }, {
+          value: {{hufflepuff}},
+          label: 'Hufflepuff',
+          color: '#ecb939',
+          highlight: '#726255'
+        }, {
+          value: {{slytherin}},
+          label: 'Slytherin',
+          color: '#2a623d',
+          highlight: '#aaaaaa '
+        }, {
+          value: {{ravenclaw}},
+          label: 'Ravenclaw',
+          color: '#222f5b',
+          highlight: '#946B2D'
+        }];
+        var options = {};
+
+        var ctx = $(e.target).find("canvas").get(0).getContext("2d");
+
+        /* global Chart */
+       new Chart(ctx).Pie(data, options);
+      });
+    </script>
+  </div>
+
+
+
+</body>
+
+</html>

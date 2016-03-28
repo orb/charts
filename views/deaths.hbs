@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>WWGWC Charts</title>
+  {{> head}}
+</head>
+<body>
+  <div id="deaths" data-role="page" data-theme="a">
+    <div data-role="header">
+      <h1>Let them eat pie</h1>
+    </div>
+
+    <div data-role="content">
+      <div class="ui-body ui-body-a ui-corner-all">
+        <h3>How deathly were those hallows?</h3>
+        <p>This chart shows all the deaths in the Harry Potter books,
+        at least according to <a href="http://citegeist.com/?p=350">someone on the internet</a>.</p>
+
+        
+        <div class="ui-grid-a">
+          <div class="ui-block-a" style="text-align: center">
+            <canvas width="150px" height="150px" />
+          </div>
+          <div id="legend" class="ui-block-b" />
+        </div>
+        
+    
+      </div>
+    </div>
+
+    <a href="/" class="ui-btn ui-corner-all">Back to the start</a>
+    <script>
+      $(document).on('pageshow', "#deaths", function(e) {
+        var data = [
+          {{#each books}}
+            {
+              label: "{{{title}}}",
+              value: {{deaths}},
+              color: chance.color()
+            }
+            {{#unless @last}},{{/unless}}
+          {{/each}}
+          ];
+        var options = {
+        };
+
+        var ctx = $(e.target).find("canvas").get(0).getContext("2d");
+
+        /* global Chart */
+        var chart = new Chart(ctx).Pie(data ,options);
+       
+       $("#legend").html(chart.generateLegend());
+      });
+    </script>
+  </div>
+</body>
+</html>
